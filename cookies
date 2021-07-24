@@ -1,0 +1,18 @@
+from selenium import webdriver
+from fake_useragent import UserAgent
+import time
+import pickle
+
+ua = UserAgent()
+options = webdriver.ChromeOptions()
+options.add_argument('user-agend=' + ua.chrome)
+options.add_argument("--disable-blink-features=AutomationControlled")
+browser = webdriver.Chrome(
+    executable_path="chromedriver.exe",options=options)
+
+browser.get('https://vk.com/')
+time.sleep(20)
+pickle.dump(browser.get_cookies(),open('session_vk','wb'))
+
+browser.close()
+browser.quit()
